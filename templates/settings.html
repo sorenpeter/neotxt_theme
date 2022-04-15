@@ -1,0 +1,277 @@
+{{ define "content" }}
+{{ if .IsAdmin }}
+<article id="adminSec" class="profile-header">
+  <hgroup>
+    <a href="/manage/pod"><i class="ti ti-device-analytics"></i> Poderator Settings</a>
+    <h2>Access this pod instance administration tools.</h2>
+  </hgroup>
+</article>
+{{ end }}
+<article class="profile-header">
+  <a id="profile-avatar" href="{{ $.User.URL | trimSuffix "/twtxt.txt" }}" class="u-url">
+    <img class="avatar u-photo" src="/user/{{ $.User.Username }}/avatar" alt="" loading=lazy />
+  </a>
+  <hgroup>
+    <h3>{{ .User.Username }}</h3>
+    <h2>{{ .User.URL | hostnameFromURL }}</h2>
+  </hgroup>
+  <p>{{ if gt (len .User.Tagline) 0 }}{{ .User.Tagline }}{{ else }}<em>{{ tr . "SettingsInfoMissingTagline" }}</em>{{ end }}</p>
+</article>
+<div class="profile-side">
+  <article id="profile-info">
+    <hgroup>
+      <h3>{{ tr . "SettingsInfoUserInfo" }}</h3>
+      <h2><hr></h2>
+    </hgroup>
+    {{ template "followStats" (dict "Profile" .Profile "Ctx" .) }}
+    {{ template "mutedStats" (dict "User" .User "Ctx" .) }}
+  </article>
+  <article id="profile-links">
+    <hgroup>
+      <h3>{{ tr . "SettingsInfoUserLinks" }}</h3>
+      <h2><hr></h2>
+    </hgroup>
+    <div>
+      <ul>
+        {{ template "profileLinks" (dict "Authenticated" .Authenticated "CSRFToken" .CSRFToken "Profile" .Profile "User" .User "Ctx" .) }}
+      </ul>
+    </div>
+  </article>
+</div>
+<article>
+  <form action="/settings/addlink" enctype="multipart/form-data" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ $.CSRFToken }}">
+    <div>
+      <hgroup>
+        <h2>{{ tr . "CustomLinkTitle" }}</h2>
+        <h3>{{ tr . "CustomLinkSummary" }}</h3>
+      </hgroup>
+    </div>
+    <div class="grid">
+      <div>
+        <input id="newLinkTitle" maxlength=32 type="text" name="linkTitle" placeholder="{{ tr . "CustomLinkAddTitle" }}" aria-label="{{ tr . "CustomLinkAddTitle" }}" />
+      </div>
+      <div>
+        <input id="newLinkURL" type="text" name="linkURL" placeholder="{{ tr . "CustomLinkAddURL" }}" aria-label="{{ tr . "CustomLinkAddURL" }}" />
+      </div>
+    </div>
+    <button type="submit" class="primary">{{ tr . "CustomLinkAddSubmit" }}</button>
+  </form>
+</article>
+<article class="grid">
+  <form action="/settings" enctype="multipart/form-data" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ $.CSRFToken }}">
+    <div>
+      <hgroup>
+        <h2>{{ tr . "SettingsTitle" }}</h2>
+        <h3>{{ tr . "SettingsSummary" }}</h3>
+      </hgroup>
+    </div>
+    <div>
+      <label for="avatar">
+        {{ tr . "SettingsFormChangeAvatarTitle" }}
+        <input id="avatar_upload" type="file" accept="image/png, image/jpeg" name="avatar_file" aria-label="Upload Avatar" />
+      </label>
+    </div>
+    <div class="grid">
+      <div>
+        <label for="tagline">
+          {{ tr . "SettingsFormChangeTaglineTitle" }}
+          <input id="tagline" type="text" name="tagline" placeholder="{{ tr . "SettingsFormChangeTagline" }}" aria-label="Tagline" value="{{ .User.Tagline }}" />
+        </label>
+      </div>
+    </div>
+    <div class="grid">
+      <div>
+        <label for="password">
+          {{ tr . "SettingsFormChangePasswordTitle" }}
+          <input id="password" type="password" name="password" placeholder="{{ tr . "SettingsFormChangePassword" }}" aria-label="Password" autocomplete="current-password">
+        </label>
+      </div>
+      <div>
+        <label for="email">
+          {{ tr . "SettingsFormChangeEmailTitle" }} <span class="help" title="{{ (tr . "SettingsFormChangeEmailSummary") | html }}"><i class="ti ti-help"></i></span>
+          <input id="email" type="email" name="email" placeholder="{{ tr . "SettingsFormChangeEmail" }}" aria-label="Email">
+        </label>
+      </div>
+    </div>
+    <div class="grid">
+      <div>
+        <label for="displayDatesInTimezone">
+          {{ tr . "SettingsFormTimezoneTitle" }}
+          <select id="displayDatesInTimezone" name="displayDatesInTimezone">
+            {{ range .Timezones }}
+            <option value="{{ .TzName }}" {{ if eq $.User.DisplayDatesInTimezone .TzName }}selected{{ end }}>{{ .NameWithOffset }}</option>
+            {{ end }}
+          </select>
+        </label>
+      </div>
+      <div>
+        <fieldset>
+          <legend>{{ tr . "SettingsFormTimePreferenceTitle" }}</legend>
+          <label for="12h">
+            <input type="radio" name="displayTimePreference" value="12h" {{ if eq $.User.DisplayTimePreference "12h" }}checked{{ end }}> 12hr
+          </label>
+          <label for="24h">
+            <input type="radio" name="displayTimePreference" value="24h" {{ if eq $.User.DisplayTimePreference "24h" }}checked{{ end }}> 24hr
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="grid">
+      <div>
+        <fieldset>
+          <legend>{{ tr . "SettingsFormOpenLinksInPreferenceTitle" }}</legend>
+          <label for="samewindow">
+            <input type="radio" name="openLinksInPreference" value="samewindow" {{ if eq $.User.OpenLinksInPreference "samewindow" }}checked{{ end }}>
+            {{ tr . "SettingsFormOpenLinksInPreferenceSameWindow" }}
+          </label>
+          <label for="newwindow">
+            <input type="radio" name="openLinksInPreference" value="newwindow" {{ if eq $.User.OpenLinksInPreference "newwindow" }}checked{{ end }}>
+            {{ tr . "SettingsFormOpenLinksInPreferenceNewWindow" }}
+          </label>
+        </fieldset>
+      </div>
+      <div>
+        <fieldset>
+          <legend>{{ tr . "SettingsFormTimelinePreferenceTitle" }}</legend>
+          <label for="timelineList">
+            <input type="radio" name="displayTimelinePreference" value="list" {{ if eq $.User.DisplayTimelinePreference "list" }}checked{{ end }}>
+            {{ tr . "SettingsFormTimelinePreferenceList" }}
+          </label>
+          <label for="timelineFlat">
+            <input type="radio" name="displayTimelinePreference" value="flat" {{ if eq $.User.DisplayTimelinePreference "flat" }}checked{{ end }}>
+            {{ tr . "SettingsFormTimelinePreferenceFlat" }}
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="grid">
+      <div>
+        <fieldset>
+          <legend>{{ tr . "SettingsTwtTitle" }}</legend>
+          <label for="visCompact">
+            <input id="visCompact" type="checkbox" name="visibilityCompact" aria-label="{{ tr . "SettingsTwtCompact" }}" role="switch" {{ if $.User.VisibilityCompact }}checked{{ end }}>
+            {{ tr . "SettingsTwtCompact" }} <span class="vp-c-help"><i class="ti ti-help"></i></span>
+          </label>
+          <label for="visReadmore">
+            <input id="visReadmore" type="checkbox" name="visibilityReadmore" aria-label="{{ tr . "SettingsTwtReadmore" }}" role="switch" {{ if $.User.VisibilityReadmore }}checked{{ end }}>
+            {{ tr . "SettingsTwtReadmore" }} <span class="help" title="{{ tr . "SettingsTwtReadmoreHelp" }}"><i class="ti ti-help"></i>
+          </label>
+          <label for="lnkVerify">
+            <input id="lnkVerify" type="checkbox" name="linkVerification" aria-label="{{ tr . "SettingsTwtLinkVerification" }}" role="switch" {{ if .User.LinkVerification }}checked{{ end }}>
+            {{ tr . "SettingsTwtLinkVerification" }}
+          </label>
+          <label for="pvcStripTrack">
+            <input id="pvcStripTrack" type="checkbox" name="stripTrackingParam" aria-label="{{ tr . "SettingsTwtStripTrackingParam" }}" role="switch" {{ if .User.StripTrackingParam }}checked{{ end }}>
+            {{ tr . "SettingsTwtStripTrackingParam" }} <span class="help" title="{{ tr . "SettingsTwtStripTrackingParamHelp" }}"><i class="ti ti-help"></i>
+          </label>
+        </fieldset>
+      </div>
+      <div>
+        <fieldset>
+          <legend>{{ tr . "SettingsFormPrivacySettingsTitle" }}</legend>
+          <label for="isBookmarksPubliclyVisible">
+            <input id="isBookmarksPubliclyVisible" type="checkbox" name="isBookmarksPubliclyVisible" aria-label="{{ tr . "SettingsFormPrivacySettingsShowBookmarks" }}" role="switch" {{ if .User.IsBookmarksPubliclyVisible }}checked{{ end }}>
+            {{ tr . "SettingsFormPrivacySettingsShowBookmarks" }}
+          </label>
+          <label for="isFollowersPubliclyVisible">
+            <input id="isFollowersPubliclyVisible" type="checkbox" name="isFollowersPubliclyVisible" aria-label="{{ tr . "SettingsFormPrivacySettingsShowFollowers" }}" role="switch" {{ if .User.IsFollowersPubliclyVisible }}checked{{ end }}>
+            {{ tr . "SettingsFormPrivacySettingsShowFollowers" }}
+          </label>
+          <label for="isFollowingPubliclyVisible">
+            <input id="isFollowingPubliclyVisible" type="checkbox" name="isFollowingPubliclyVisible" aria-label="{{ tr . "SettingsFormPrivacySettingsShowFollowings" }}" role="switch" {{ if .User.IsFollowingPubliclyVisible }}checked{{ end }}>
+            {{ tr . "SettingsFormPrivacySettingsShowFollowings" }}
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="grid">
+      <div>
+        <fieldset>
+          <legend>{{ tr . "ManagePodMediaSettings" }}</legend>
+          <label for="displayMedia">
+            <input id="displayMedia" type="checkbox" name="displayMedia" aria-label="{{ tr . "ManagePodMediaSettingsDisplay" }}" role="switch" {{ if .User.DisplayMedia }}checked{{ end }} />
+            {{ tr . "ManagePodMediaSettingsDisplay" }}
+          </label>
+          <label for="originalMedia">
+            <input id="originalMedia" type="checkbox" name="originalMedia" aria-label="{{ tr . "ManagePodMediaSettingsOriginal" }}" role="switch" {{ if .User.OriginalMedia }}checked{{ end }} />
+            {{ tr . "ManagePodMediaSettingsOriginal" }}
+          </label>
+        </fieldset>
+      </div>
+      <div>
+        <fieldset>
+          <legend>{{ tr . "SettingsFormDisplayImagesPreferenceTitle" }}</legend>
+          <label for="inline">
+            <input id="inline" type="radio" name="displayImagesPreference" value="inline" {{ if eq $.User.DisplayImagesPreference "inline" }}checked{{ end }}>
+            {{ tr . "SettingsFormDisplayImagesPreferenceInline" }}
+          </label>
+          <label for="lightbox">
+            <input id="lightbox" type="radio" name="displayImagesPreference" value="lightbox" {{ if eq $.User.DisplayImagesPreference "lightbox" }}checked{{ end }}>
+            {{ tr . "SettingsFormDisplayImagesPreferenceLightbox" }}
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="grid">
+      <div>
+        <fieldset id="theme">
+          <legend>{{ tr . "SettingsFormThemeTitle" }}</legend>
+          <select name="theme">
+            <option id="theme-auto" value="auto" {{ if eq .User.Theme "auto" }}selected{{ end }}>{{ tr . "ThemeAuto" }}</option>
+            <option id="theme-dark-classic" value="dark-classic" {{ if eq .User.Theme "dark-classic" }}selected{{ end }}>{{ tr . "ThemeDarkClassic" }}</option>
+            <option id="theme-light-classic" value="light-classic" {{ if eq .User.Theme "light-classic" }}selected{{ end }}>{{ tr . "ThemeLightClassic" }}</option>
+            <option id="theme-dark" value="dark" {{ if eq .User.Theme "dark" }}selected{{ end }}>{{ tr . "ThemeDark" }}</option>
+            <option id="theme-light" value="light" {{ if eq .User.Theme "light" }}selected{{ end }}>{{ tr . "ThemeLight" }}</option>
+          </select>
+        </fieldset>
+      </div>
+    </div>
+    <div class="grid">
+      <div id="cus-pc">
+        <fieldset>
+          <legend>{{ tr . "SettingsTwtCustomColorPrimary" }} <span class="help" title="{{ tr . "SettingsTwtCustomColorHelp" }}"><i class="ti ti-help"></i></legend>
+          <label for="cusPrimaryColor">
+            <input id="cusPrimaryColor" type="text" name="customPrimaryColor" placeholder="{{ tr . "SettingsTwtCustomColorReset" }}" aria-label="{{ tr . "SettingsTwtCustomColorPrimary" }}" {{ if .User.CustomPrimaryColor }}value="{{ .User.CustomPrimaryColor }}"{{ end }}>
+          </label>
+        </fieldset>
+      </div>
+      <div id="cus-sc">
+        <fieldset>
+          <legend>{{ tr . "SettingsTwtCustomColorSecondary" }} <span class="help" title="{{ tr . "SettingsTwtCustomColorHelp" }}"><i class="ti ti-help"></i></legend>
+          <label for="cusSecondaryColor">
+            <input id="cusSecondaryColor" type="text" name="customSecondaryColor" placeholder="{{ tr . "SettingsTwtCustomColorReset" }}" aria-label="{{ tr . "SettingsTwtCustomColorSecondary" }}" {{ if .User.CustomSecondaryColor }}value="{{ .User.CustomSecondaryColor }}"{{ end }}>
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <button type="submit" class="primary">{{ tr . "SettingsFormUpdate" }}</button>
+  </form>
+</article>
+<article>
+  <div>
+    <hgroup>
+      <h2>{{ tr . "SettingsToolsTitle" }}</h2>
+      <h3>{{ (tr . "SettingsToolsSummary" (dict "InstanceName" .InstanceName)) | html }}</h3>
+    </hgroup>
+  </div>
+  <div>
+    <a role="button" href="javascript:{{ .Bookmarklet }}">{{ tr . "SettingsToolsShareLinkTitle" (dict "InstanceName" .InstanceName) }}</a>
+  </div>
+</article>
+<article>
+  <div>
+    <hgroup>
+      <h2>{{ tr . "SettingsDeleteAccountTitle" }}</h2>
+      <h3>{{ (tr . "SettingsDeleteAccountSummary") | html }}</h3>
+    </hgroup>
+  </div>
+  <div>
+    <form action="/delete" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ $.CSRFToken }}">
+      <button type="submit" class="contrast" onclick="return confirm('{{ tr . "DeleteAccountFormConfirm" }}')">{{ tr . "SettingsDeleteAccountFormDelete" }}</button>
+    </form>
+  </div>
+</article>
+{{ end }}

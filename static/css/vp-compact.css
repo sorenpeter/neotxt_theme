@@ -1,0 +1,364 @@
+.dt-compact {
+  margin-left: auto !important;
+  text-align: right !important;
+  
+}
+
+.dt-compact div:first-of-type {
+  font-size: 0.9rem !important;
+  font-weight: 400 !important;
+  color: var(--primary) !important;
+  margin: -0.25rem 0 -0.25rem 0 !important;
+}
+
+.dt-compact, .dt-compact .u-url {
+  font-size: small;
+}
+
+.twt-context {
+  padding: 0.45rem 0 0.35rem 0.25rem !important;
+}
+
+.twt-nav {
+  padding: 0.5rem 0 !important;
+  font-size: 0 !important;
+}
+
+.twt-nav a {
+  margin-right: 2rem !important;
+}
+
+.twt-nav i {
+  font-size: 1.25rem !important;
+}
+
+#twt-options {
+  margin-left: 0 auto !important;
+  margin-right: -2.15rem !important;
+}
+
+.yarn-count-badge {
+  margin-left: -0.5rem !important;
+}
+
+.avatar:not(#profile-avatar .avatar) {
+  width: 2rem !important;
+  height: 2rem !important;
+  margin-top: -0.25rem !important;
+}
+
+.e-content {
+  margin-top: -0.25rem !important;
+}
+
+.toolbar-nav {
+  gap: 0 !important;
+  margin: 0 0 -0.5rem -0.5rem !important;
+}
+
+#postbox:not(.drawer) {
+  margin: 1.5rem 0 0 0 !important;
+}
+
+.muteTwtBtn {
+  margin-right: 1rem !important;
+}
+
+.drawer nav {
+  margin-top: -0.5rem !important;
+  margin-left: 0 !important;
+}
+
+@media (max-width: 576px) {
+  #mainNav {
+    padding-bottom: 1rem !important;
+  }
+
+  #newPost {
+    padding: 1rem 0.5rem 1rem 0.5rem !important;
+    margin: 0.5rem 0 1.25rem 0 !important;
+  }
+
+  #newPost[open=""] {
+    padding-bottom: 0.1rem !important;
+  }
+
+  #newPost #postbox {
+    margin-bottom: -2.5rem !important;
+  }
+
+  #postToUser #postbox {
+    margin: 1rem 0.5rem -3.85rem 0.5rem !important;
+  }
+
+  #recentTwts summary {
+    margin-bottom: 1rem !important;
+  }
+
+  .timeline-nav:nth-of-type(1) {
+    margin-top: -1.25rem !important;
+  }
+
+  .timeline-nav:nth-of-type(2) {
+    margin-bottom: -0.5rem !important;
+  }
+
+  .yarn-nav:nth-of-type(1) {
+    margin-top: 0.1rem !important;
+  }
+
+  .yarn-nav:nth-of-type(2) {
+    margin-bottom: -3.5rem !important;
+  }
+
+  #recentTwts .timeline-nav:nth-of-type(1) {
+    margin-top: -0.75rem !important;
+  }
+
+  #recentTwts .timeline-nav:nth-of-type(2) {
+    margin-bottom: -4.5rem !important;
+  }
+
+  #postbox:not(.drawer) {
+    margin: 1.5rem 0.5rem -1rem 0.5rem !important;
+  }
+
+  #postbox.drawer {
+    margin: 1.25rem -0.5rem -0.25rem -0.5rem !important;
+  }
+
+  #postbox.drawer .toolbar-nav {
+    padding-top: 0.2rem !important;
+  }
+
+  .conv-post:not(.form-reply) {
+    margin-bottom: 1rem !important;
+  }
+
+  .toolbar-nav {
+    flex: 0 !important;
+    margin: 0 0 0.5rem 0 !important;
+  }
+
+  .drawer nav {
+    margin: -0.3rem 0 0.4rem 0.4rem !important;
+  }
+
+  .yarn-count-badge {
+    margin-left: 0.25rem !important;
+  }
+
+  .twt-nav a {
+    font-size: 0 !important;
+    margin-right: 1rem !important;
+  }
+
+  .twt-nav a:first-of-type {
+    margin-right: 1.25rem !important;
+  }
+
+  .deleteBtn i {
+    margin-right: 2rem !important;
+  }
+
+  .replyBtn i,
+  .convBtn i,
+  .forkBtn i,
+  .editBtn i,
+  .deleteBtn i,
+  .muteTwtBtn i,
+  .bookmarkBtn i {
+    font-size: 1.25rem !important;
+  }
+
+  #twt-options {
+    margin-top: 0 !important;
+    margin-right: -1.25rem !important;
+  }
+
+  #twt-options a:first-of-type {
+    margin-right: 0.5rem !important;
+  }
+
+  .h-feed article:last-of-type {
+    margin-bottom: 0.5rem !important;
+  }
+
+  #twt-conv {
+    margin-bottom: 0rem !important;
+  }
+
+  body > footer {
+    margin-top: 3rem !important;
+    padding: 0.75rem !important;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  #mainNav {
+    padding-bottom: 2rem !important;
+  }
+
+  #newPost {
+    padding: 1rem 0.5rem 1rem 0.5rem !important;
+    margin: -1rem 0 1.25rem 0 !important;
+  }
+
+  #newPost[open=""] {
+    padding-bottom: 0.1rem !important;
+  }
+
+  #newPost #postbox {
+    margin: 2.5rem 0.5rem -0.5rem 0.5rem !important;
+  }
+
+  #postToUser #postbox {
+    margin: 2.5rem 0.5rem -1.6rem 0.5rem !important;
+  }
+
+  #twt-conv {
+    margin-top: -0.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  #recentTwts summary {
+    margin-bottom: 1rem !important;
+  }
+
+  .timeline-nav:nth-of-type(1) {
+    margin-top: -1.25rem !important;
+  }
+
+  .timeline-nav:nth-of-type(2) {
+    margin-bottom: 0.25rem !important;
+  }
+
+  .toolbar-nav {
+    flex: 0 !important;
+    margin: -1.75rem 0 -0.5rem 0 !important;
+  }
+
+  #postbox:not(.drawer) {
+    margin: 3rem 0 1.5rem 0 !important;
+  }
+
+  #postbox.drawer {
+    margin: 1.25rem 0 0 0 !important;
+  }
+
+  #postbox.drawer .toolbar-nav {
+    padding-top: 0.2rem !important;
+  }
+
+  .yarn-nav:nth-of-type(1) {
+    margin-top: -1.25rem !important;
+  }
+
+  .yarn-nav:nth-of-type(2) {
+    margin-bottom: 0.5rem !important;
+  }
+
+  body > footer {
+    margin-top: -1.25rem !important;
+    padding: 0.5rem 0 0.5rem 0 !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+  #postToUser #postbox {
+    margin: 1rem 0.5rem -1rem 0.5rem !important;
+  }
+
+  .timeline-nav:nth-of-type(2) {
+    margin-bottom: -0.75rem !important;
+  }
+
+  .yarn-nav:nth-of-type(2) {
+    margin-top: -0.5rem !important;
+    margin-bottom: -1rem !important;
+  }
+
+  #recentTwts .timeline-nav:nth-of-type(1) {
+    margin-top: -0.25rem !important;
+  }
+
+  #recentTwts .timeline-nav:nth-of-type(2) {
+    margin-bottom: -2.75rem !important;
+  }
+
+  #postbox:not(.drawer) {
+    margin: 0.5rem 0.5rem 0.25rem 0.5rem !important;
+  }
+
+  #postbox.drawer {
+    margin: 1.25rem 0 0.75rem 0 !important;
+  }
+
+  #postbox.drawer .toolbar-nav {
+    padding-top: 0.2rem !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  #postToUser #postbox {
+    margin: 1.5rem 0.5rem -1.5rem 0.5rem !important;
+  }
+
+  .yarn-nav:nth-of-type(1) {
+    margin-top: -0.75rem !important;
+    margin-bottom: -0.5rem !important;
+  }
+
+  .yarn-nav:nth-of-type(2) {
+    margin-top: -0.5rem !important;
+    margin-bottom: -1rem !important;
+  }
+
+  #newPost #postbox {
+    margin-bottom: -0.25rem !important;
+  }
+
+  #postbox:not(.drawer) {
+    margin: 0.5rem 0.5rem 0.25rem 0.5rem !important;
+  }
+
+  #postbox.drawer {
+    margin: 1.25rem 0 0.25rem 0 !important;
+  }
+
+  #postbox.drawer .toolbar-nav {
+    padding-top: 0.2rem !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  #postToUser #postbox {
+    margin: 1.5rem 0.5rem -1.5rem 0.5rem !important;
+  }
+
+  .yarn-nav:nth-of-type(1) {
+    margin-top: -0.75rem !important;
+    margin-bottom: -0.5rem !important;
+  }
+
+  .yarn-nav:nth-of-type(2) {
+    margin-top: -0.5rem !important;
+    margin-bottom: -1rem !important;
+  }
+
+  #newPost #postbox {
+    margin-bottom: -0.25rem !important;
+  }
+
+  #postbox:not(.drawer) {
+    margin: 0.5rem 0.5rem 0.25rem 0.5rem !important;
+  }
+
+  #postbox.drawer {
+    margin: 1.25rem 0 0.25rem 0 !important;
+  }
+
+  #postbox.drawer .toolbar-nav {
+    padding-top: 0.2rem !important;
+  }
+}

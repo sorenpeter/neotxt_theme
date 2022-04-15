@@ -1,0 +1,94 @@
+/* DEBUG: BORDERES ON EVERYTHING */
+
+* {
+	/*border: thin solid red;*/
+}
+
+/* Remove all shadows */
+*, #newPost, article, #mobileMenu #mobileNav {
+  box-shadow: none;
+}
+
+/* === Header / Menu === */
+
+/* Logo */
+#podLogo a code pre,
+#podLogo a code {
+	color: var(--primary);
+	background: initial;
+}
+
+#podNavigation a {
+	padding: initial !important;
+	font-size: small;
+ 	color: var(--primary);
+}
+
+#podNavigation .ti {
+	font-size: large;
+	/*margin-bottom: -0.2rem;*/
+}
+
+a .ti {
+	color: var(--icon-color);
+}
+
+
+#podNavigation a time {
+	display: block;
+	color: var(--muted-color); /*var(--code-color);*/
+	font-size: x-small;
+	margin-top: -0.2rem;
+}
+
+#podNavigation a time:before { content: "("; } 
+#podNavigation a time:after { content: ")"; } 
+
+#podSearch button { width: 5.5rem; }
+
+/* === Timeline / Posts === */
+
+
+#newPost {
+	border: thin solid var(--primary);
+}
+
+.toolbar-nav .ti {
+	color: var(--icon-color);
+}
+
+article {
+  border: thin solid var(--muted-border-color);
+  background: var(--background-color);
+  /*box-shadow: none;*/
+}
+
+
+/* Post content and links */
+.e-content a {
+	color: var(--link-color);
+}
+
+.e-content a:visited {
+	color: var(--link-visited);
+}
+
+
+.replyBtn, .convBtn, .editBtn, .deleteBtn, .forkBtn {
+ 	color: var(--primary);
+ 	font-size: small;
+}
+
+.yarn-count-badge {
+	color: #eee;
+}
+
+.twt-nav a .ti {
+	font-size: medium;
+}
+
+/* Form elenments 
+[type="file"]::file-selector-button {
+	background: var(--primary);
+	color: var(--primary-inverse);
+}

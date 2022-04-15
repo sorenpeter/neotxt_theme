@@ -1,0 +1,105 @@
+body,
+html {
+  overflow-x: hidden !important;
+  margin: 0 auto !important;
+}
+
+body {
+  max-width: 850px !important;
+}
+
+:root {
+  --font-size: 16px !important;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
+
+a {
+  text-decoration: none !important;
+  padding: 0.1rem !important;
+  border-radius: 0.3rem !important;
+  -webkit-border-radius: 0.3rem !important;
+  -moz-border-radius: 0.3rem !important;
+}
+
+a:active, a:focus {
+  background-color: transparent !important;
+}
+
+dialog article {
+  margin: 0 0 0 -2rem !important;
+  padding: 1rem !important;
+}
+
+pre>code {
+  padding: 0rem 0.25rem !important;
+}
+
+pre,
+code,
+kbd {
+  margin: 0.25rem 0 !important;
+  padding: 0.2rem 0.3rem !important;
+}
+
+a[role=button] {
+  display: flex !important;
+  padding-top: 0.8rem !important;
+  padding-bottom: 0.8rem !important;
+}
+
+audio,
+video {
+  display: block !important;
+}
+
+dialog article>footer {
+  margin-top: 1rem !important;
+  padding: 0 !important;
+}
+
+dialog article>footer p {
+  padding: 0.5rem 1.5rem 2.5rem 1.5rem !important;
+  text-align: left !important;
+}
+
+input[type="search"] {
+  border-radius: 0.5rem !important;
+}
+
+.modal-is-opening dialog,
+.modal-is-opening dialog > figure,
+.modal-is-closing dialog,
+.modal-is-closing dialog > figure {
+  -webkit-animation-duration: 0.2s !important;
+  animation-duration: 0.2s !important;
+  -webkit-animation-timing-function: ease-in-out !important;
+  animation-timing-function: ease-in-out !important;
+  -webkit-animation-fill-mode: both !important;
+  animation-fill-mode: both !important;
+}
+
+.modal-is-opening dialog,
+.modal-is-closing dialog {
+  -webkit-animation-duration: 0.8s !important;
+  animation-duration: 0.8s !important;
+  -webkit-animation-name: fadeIn !important;
+  animation-name: fadeIn !important;
+}
+
+.modal-is-opening dialog > figure,
+.modal-is-closing dialog > figure {
+  -webkit-animation-delay: 0.2s !important;
+  animation-delay: 0.2s !important;
+  -webkit-animation-name: slideInDown !important;
+  animation-name: slideInDown !important;
+}
+
+.modal-is-closing dialog,
+.modal-is-closing dialog > figure {
+  -webkit-animation-delay: 0s !important;
+  animation-delay: 0s !important;
+  animation-direction: reverse !important;
+}
